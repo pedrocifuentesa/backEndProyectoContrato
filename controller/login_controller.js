@@ -21,7 +21,7 @@ const login = (req, res, next) => {
 
   //let usuario = req.body.Usuario;
   //let password = req.body.pass;
-  console.log(req.body)
+  
   let user = new Usuario(req.body)
   user.usuario=user.usuario.toUpperCase();
   let data = {
@@ -42,11 +42,12 @@ const login = (req, res, next) => {
           message: 'usuario o (password) incorrecto'
         });
       }
-
+      console.log(item);
       let payload ={
         idusuario: item.idusuario,
         usuario: item.usuario,
-        rut: item.rut
+        rut: item.rut,
+        tipoUsuario: item.tipoUsuario
       }
   
       let token = jwt.sign(
@@ -64,6 +65,7 @@ const login = (req, res, next) => {
           idusuario: item.idusuario,
           usuario: item.usuario,
           rut: item.rut,
+          tipoUsuario: item.tipoUsuario,
           token: token
         }
       });

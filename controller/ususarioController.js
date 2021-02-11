@@ -43,7 +43,9 @@ function getAll(req, res,next) {
   }
 
   function create(req,res,next) {
+    
       const nuevo_usuario = new Usuario(req.body);
+      console.log(nuevo_usuario);
       nuevo_usuario.usuario=nuevo_usuario.usuario.toUpperCase();
       nuevo_usuario.tipoUsuario=nuevo_usuario.tipoUsuario.toUpperCase();
        Usuario.find(nuevo_usuario,(err,item)=>{
@@ -57,7 +59,9 @@ function getAll(req, res,next) {
                 usuario : req.body.usuario.toUpperCase(),
                 pass : bcrypt.hashSync(req.body.pass, 10),
                 fcreacion : new Date(),
-                correo : req.body.correo.toUpperCase()
+                correo : req.body.correo.toUpperCase(),
+                rut:req.body.rut,
+                tipoUsuario:req.body.tipoUsuario.toUpperCase()
             }
             Usuario.create(data,(err, items) => {
               if (err || !items) return errorHandler(err, next, items);
